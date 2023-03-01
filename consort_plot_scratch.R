@@ -49,3 +49,26 @@ rm(trialno, exc1, induc, exc2, exc, arm, arm3, fow1, fow2, N)
 
 
 df$exc1
+
+df$arm <- factor(df$arm)
+
+library(grid)
+# Might want to change some settings
+options(txt_gp = gpar(cex = 0.8))
+
+
+# i.e. data have the information
+# about ID
+# whether exclude or not
+
+names(df)[1] <- c("ID")
+
+consort_plot_henry <- function(dat, 
+                               ID,
+                               exclude_col,
+                               arm_col,
+                               ){
+  
+}
+
+
