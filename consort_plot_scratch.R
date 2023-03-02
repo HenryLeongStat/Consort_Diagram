@@ -64,14 +64,18 @@ options(txt_gp = gpar(cex = 0.8))
 
 
 ## example:
-consort_plot_material <- vector(mode = "list", length=8)
+consort_plot_material <- vector(mode = "list", length=12)
 names(consort_plot_material) <- c("box",
                                   "box",
                                   "side",
                                   "box",
-                                  "split",
+                                  "box",
+                                  "box",
                                   "box",
                                   "side",
+                                  "box",
+                                  "side",
+                                  "box",
                                   "box")
 
 consort_plot_material[[1]] <- c("Study 1 (n=10)", 
@@ -84,8 +88,19 @@ consort_plot_material[[3]] <- "Exclude (n=10):\n\u2022Missing ID (n=5)\n\u2022Wr
 consort_plot_material[[4]] <- "Randomization (n=50)"
 consort_plot_material[[5]] <- c("Arm 1 (n=20)", "Arm 2 (n=30)")
 consort_plot_material[[6]] <- c("Arm 1 (n=20)", "Arm 2 (n=30)")
-consort_plot_material[[7]] <- c("Drop out (n=10)", "Arm 2 (n=20)")
-consort_plot_material[[8]] <- c("Final (n=10)", "Final (n=10)")
+consort_plot_material[[7]] <- c("Merge (n=50)")
+consort_plot_material[[8]] <- c("Drop out (n=20)")
+consort_plot_material[[9]] <- c("Merge (n=30)")
+consort_plot_material[[10]] <- c("Drop out (n=5)")
+consort_plot_material[[11]] <- c("Final randomization (n=25)")
+consort_plot_material[[12]] <- c("Final split 1 (n=5)",
+                                 "Final split 2 (n=5)",
+                                 "Final split 3 (n=5)",
+                                 "Final split 4 (n=10)"
+                                 
+                                 
+)
+
 
 label_consort <- c("1"="Initial Study",
                    "2"="Group all studies",
@@ -112,9 +127,3 @@ consort_plot_henry <- function(consort_plot_material){
 
 a <- consort_plot_henry(consort_plot_material)
 plot(a)
-
-add_label_box(a, txt=c("1" = "Screening",
-                       "2" = "123",
-                       "3" = "Randomized",
-                       "4" = "Final analysis",
-                       "5"="456"))
