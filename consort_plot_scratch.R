@@ -61,14 +61,60 @@ options(txt_gp = gpar(cex = 0.8))
 # about ID
 # whether exclude or not
 
-names(df)[1] <- c("ID")
 
-consort_plot_henry <- function(dat, 
-                               ID,
-                               exclude_col,
-                               arm_col,
-                               ){
-  
+
+## example:
+consort_plot_material <- vector(mode = "list", length=8)
+names(consort_plot_material) <- c("box",
+                                  "box",
+                                  "side",
+                                  "box",
+                                  "split",
+                                  "box",
+                                  "side",
+                                  "box")
+
+consort_plot_material[[1]] <- c("Study 1 (n=10)", 
+                                "Study 2 (n=20)",
+                                "Study 3 (n=30)"
+)
+
+consort_plot_material[[2]] <- "Merge (n=60)"
+consort_plot_material[[3]] <- "Exclude (n=10):\n\u2022Missing ID (n=5)\n\u2022Wrong information (n=5)"
+consort_plot_material[[4]] <- "Randomization (n=50)"
+consort_plot_material[[5]] <- c("Arm 1 (n=20)", "Arm 2 (n=30)")
+consort_plot_material[[6]] <- c("Arm 1 (n=20)", "Arm 2 (n=30)")
+consort_plot_material[[7]] <- c("Drop out (n=10)", "Arm 2 (n=20)")
+consort_plot_material[[8]] <- c("Final (n=10)", "Final (n=10)")
+
+label_consort <- c("1"="Initial Study",
+                   "2"="Group all studies",
+                   "4"="Randomized",
+                   "5"="First follow-up",
+                   "6"="Im 6")
+
+# note side doesn't count as one level
+consort_plot_henry <- function(consort_plot_material){
+  all_name_from_list <- names(consort_plot_material)
+  # first one should always start with box
+  concort_plot <- add_box(txt=consort_plot_material[[1]])
+  for(i in 2:(length(consort_plot_material))){
+    if(all_name_from_list[i]=="box"){
+      concort_plot <- add_box(concort_plot, txt=consort_plot_material[[i]])
+    } else if(all_name_from_list[i]=="side"){
+      concort_plot <- add_side_box(concort_plot, txt=consort_plot_material[[i]])
+    } else if(all_name_from_list[i]=="split"){
+      concort_plot <- add_split(concort_plot, txt=consort_plot_material[[i]])
+    }
+  }
+  return(concort_plot)
 }
 
+a <- consort_plot_henry(consort_plot_material)
+plot(a)
 
+add_label_box(a, txt=c("1" = "Screening",
+                       "2" = "123",
+                       "3" = "Randomized",
+                       "4" = "Final analysis",
+                       "5"="456"))
